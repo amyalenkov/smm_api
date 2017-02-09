@@ -20,6 +20,26 @@ class VkWallAnaliser
     get_topics_hash offset, topics_hash
   end
 
+  def get_all_photo_albums
+    vk_sender = VkSender.new @group_id
+    response = vk_sender.get_photo_albums
+    JSON.parse(response.body)['response']
+  end
+
+  def get_photo_albums_updated_for_date(date_from, date_till)
+    @date_from = date_from
+    @date_till = date_till
+    all_photo_albums = self.get_all_photo_albums
+    updated_albums = Array.new
+    all_photo_albums.each do |album|
+      updated = album['updated']
+      if updated.to_i >= @date_from.to_datetime.to_i && updated.to_i <= @date_till.to_datetime.to_i
+        updated_albums.push album
+      end
+    end
+    updated_albums
+  end
+
   private
 
   def get_posts(offset, posts_hash)

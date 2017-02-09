@@ -30,4 +30,9 @@ class VkSender
                                                   order: order}}
   end
 
+  def get_photo_albums
+    method_name ='photos.getAlbums'
+    RestClient.get @@url + method_name, {params: {owner_id: '-'+@group_id, version: @@version}}
+  end
+
 end
