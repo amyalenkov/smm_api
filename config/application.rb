@@ -1,0 +1,10 @@
+require 'sqlite3'
+require 'grape'
+require 'json'
+require 'rest-client'
+
+require_relative '../app/api/controller.rb'
+require_relative '../app/models/vk_groups'
+require_relative '../db/db_setup'
+require_relative '../app/helpers/vk_sender'
+require_relative '../app/helpers/analiser/vk_wall_analiser'
