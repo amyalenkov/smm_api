@@ -33,4 +33,14 @@ describe 'check vk http helper' do
     json_body = JSON.parse(response.body)
     expect(json_body['response']).to be
   end
+
+  it 'get vk group video albums' do
+    vk_sender = VkSender.new '31333866'
+    response = vk_sender.get_video_albums 10, 100, 'access_token'
+    p response.body
+    expect(response.code).to eq 200
+    json_body = JSON.parse(response.body)
+    expect(json_body['response']).to be
+  end
+
 end

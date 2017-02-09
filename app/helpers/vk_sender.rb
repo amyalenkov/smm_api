@@ -12,12 +12,12 @@ class VkSender
     RestClient.get @@url + method_name, {params: {group_id: @group_id, version: @@version}}
   end
 
-  def get_wall count, offset
+  def get_wall(count, offset)
     method_name ='wall.get'
     RestClient.get @@url + method_name, {params: {owner_id: '-'+@group_id, count: count, offset: offset, version: @@version}}
   end
 
-  def get_topics count, offset
+  def get_topics(count, offset)
     method_name ='board.getTopics'
 
     # 1 — по убыванию даты обновления;
@@ -33,6 +33,12 @@ class VkSender
   def get_photo_albums
     method_name ='photos.getAlbums'
     RestClient.get @@url + method_name, {params: {owner_id: '-'+@group_id, version: @@version}}
+  end
+
+  def get_video_albums(count, offset, access_token)
+    method_name ='video.getAlbums'
+    RestClient.get @@url + method_name, {params: {owner_id: @group_id, count: count, offset: offset, version: $version,
+                                                  access_token: access_token}}
   end
 
 end
