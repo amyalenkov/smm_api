@@ -1,6 +1,5 @@
 require 'spec_helper'
 
-$db = SQLite3::Database.open 'vk.db'
 
 describe App::Controller do
 

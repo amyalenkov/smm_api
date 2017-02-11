@@ -1,10 +1,17 @@
 class VkSender
 
   @@url = 'https://api.vk.com/method/'
+  @@auth_url = 'https://oauth.vk.com/'
   @@version = '5.62'
 
   def initialize(group_id)
     @group_id = group_id
+  end
+
+  def self.get_access_token(client_id, client_secret, redirect_uri, code)
+    method_name ='access_token'
+    RestClient.get @@auth_url + method_name, {params: {client_id: client_id, client_secret: client_secret,
+                                                       redirect_uri: redirect_uri, code: code}}
   end
 
   def get_members

@@ -1,9 +1,11 @@
 source 'https://rubygems.org'
 
-ruby '2.3.1'
+ruby '2.3.3'
 
 gem 'grape'
-gem 'sqlite3'
+gem 'pg'
+gem 'activerecord'
+
 gem 'rest-client'
 
 gem 'rspec'

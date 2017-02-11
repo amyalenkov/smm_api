@@ -1,0 +1,14 @@
+development: &default
+  adapter: postgresql
+  encoding: unicode
+  database: smm_development
+  pool: 5
+  username: amyalenkov
+  password: 2102
+  host: db
+#  host: 0.0.0.0
+#  port: 5433
+
+test:
+  <<: *default
+  database: myapp_test
