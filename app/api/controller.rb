@@ -42,9 +42,22 @@ module App
         get 'save_access_token' do
           unless params[:code].nil?
             VkAuthorize.send_code_and_save_token params[:code]
-
           end
         end
+
+        desc 'get access_token for user'
+        params do
+          requires :user_id, type: String, desc: 'id for vk user'
+        end
+        get 'get_access_token' do
+          record = VkAuthorize.get_access_token_by_user_id params[:user_id]
+          if record.nil?
+            status 404
+          else
+            record['access_token']
+          end
+        end
+
       end
 
     end

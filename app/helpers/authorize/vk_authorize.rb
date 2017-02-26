@@ -21,6 +21,10 @@ class VkAuthorize
     save_access_token access_token, user_id
   end
 
+  def self.get_access_token_by_user_id(user_id)
+    AccessToken.find_by user_id: user_id
+  end
+
   private
 
   def self.save_access_token(access_token, user_id)

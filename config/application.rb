@@ -24,7 +24,12 @@ if db.scheme == 'postgres' # Heroku environment
       :encoding => 'utf8'
   )
 else # local environment
-  environment = ENV['DATABASE_URL'] ? 'production' : 'development'
+  # environment = ENV['DATABASE_URL'] ? 'test' : 'development'
+  environment = 'test'
   db = YAML.load(ERB.new(File.read('config/database.yml')).result)[environment]
   ActiveRecord::Base.establish_connection(db)
+
+  # ActiveRecord::Base.connection.create_database(db['database'])
+  ActiveRecord::Migrator.migrate('db/migrate/')
+
 end

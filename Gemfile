@@ -8,6 +8,9 @@ gem 'activerecord'
 
 gem 'rest-client'
 
-gem 'rspec'
-gem 'capybara'
+group :test do
+  gem 'rspec'
+  gem 'capybara'
+  gem 'sqlite3'
+end
 
