@@ -35,7 +35,7 @@ module App
       resource :auth do
         desc 'get url for auth'
         get 'get_url' do
-          VkAuthorize.get_auth_url
+          {:url => VkAuthorize.get_auth_url}
         end
 
         desc 'redirect endpoint for save access_token'
@@ -54,7 +54,7 @@ module App
           if record.nil?
             status 404
           else
-            record['access_token']
+            {access_token: record['access_token']}
           end
         end
 

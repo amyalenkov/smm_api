@@ -10,7 +10,6 @@ gem 'rest-client'
 
 group :test do
   gem 'rspec'
-  gem 'capybara'
   gem 'sqlite3'
 end
 

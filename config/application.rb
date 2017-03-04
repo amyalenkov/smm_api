@@ -11,6 +11,7 @@ require_relative '../app/models/auth_param'
 require_relative '../app/helpers/vk_sender'
 require_relative '../app/helpers/analiser/vk_wall_analiser'
 require_relative '../app/helpers/authorize/vk_authorize'
+require_relative '../lib/db_helper/load_data'
 
 # Sets up database configuration
 db = URI.parse(ENV['DATABASE_URL'] || 'http://0.0.0.0')
