@@ -8,6 +8,8 @@ gem 'activerecord'
 
 gem 'rest-client'
 
+gem 'rufus-scheduler'
+
 group :test do
   gem 'rspec'
   gem 'sqlite3'
