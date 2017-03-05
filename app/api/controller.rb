@@ -7,29 +7,38 @@ module App
 
     resource :vk do
 
-      desc 'analise vk group'
-      params do
-        requires :group_id, type: String, desc: 'id vk group'
-        requires :user_id, type: String, desc: 'user id for which group analise'
-        requires :start_time, type: String, desc: 'start analise time'
-        requires :finish_time, type: String, desc: 'finish analise time'
-      end
-      post 'save_group' do
-        new_vk_group = AccessToken.new(:group_id)
-        new_vk_group.save
-      end
+      resource :group do
+        desc 'create record for analise vk group'
+        params do
+          requires :group_id, type: String, desc: 'id vk group'
+          requires :start_time, type: String, desc: 'start analise time'
+          requires :finish_time, type: String, desc: 'finish analise time'
+        end
+        post 'create_analyse' do
+          new_vk_group = AnalyseGroup.new(group_id: params[:group_id],
+                                          start_time: params[:start_time],
+                                          finish_time: params[:finish_time])
+          new_vk_group.save
+          new_vk_group
+        end
 
-      desc 'get info about vk group'
-      params do
-        requires :group_id, type: String, desc: 'id vk group'
-      end
-      get 'get_group' do
-        AccessToken.get_by_group_id(params[:group_id])
-      end
+        desc 'get info about vk group'
+        params do
+          requires :group_id, type: String, desc: 'id vk group'
+        end
+        get 'get' do
+          record = AnalyseGroup.find_by_group_id(params[:group_id])
+          if record.nil?
+            status 404
+          else
+            record
+          end
+        end
 
-      desc 'get info about all vk groups'
-      get 'get_groups' do
-        AuthParam.all
+        desc 'get info about all vk groups'
+        get 'get_all' do
+          AnalyseGroup.all
+        end
       end
 
       resource :auth do

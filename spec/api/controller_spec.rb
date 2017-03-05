@@ -51,6 +51,40 @@ describe App::Controller do
       end
     end
 
+    context 'group endpoint' do
+      it 'should create analyse group' do
+        group_id = 123
+        start_time = DateTime.now
+        finish_time = DateTime.now.next_month
+        post '/vk/group/create_analyse', group_id: group_id, start_time: start_time, finish_time: finish_time
+        expect(last_response.status).to eq 201
+        expect(JSON.parse(last_response.body)['group_id']).to eq group_id.to_s
+      end
+
+      it 'should return vk group' do
+        group_id = LoadData.create_analyse_group['group_id']
+        get '/vk/group/get', group_id: group_id
+        expect(last_response.status).to eq 200
+        expect(JSON.parse(last_response.body)['group_id']).to eq group_id.to_s
+      end
+
+      it 'should return 404 if vk group is not found' do
+        group_id = 34434
+        get '/vk/group/get', group_id: group_id
+        expect(last_response.status).to eq 404
+      end
+
+      it 'should return all vk group' do
+        group_id_1 = LoadData.create_analyse_group['group_id']
+        group_id_2 = LoadData.create_analyse_group['group_id']
+        get '/vk/group/get_all'
+        expect(last_response.status).to eq 200
+        body = JSON.parse(last_response.body)
+        expect(body.find {|r| r['group_id'] == group_id_1}['group_id']).to eq group_id_1.to_s
+        expect(body.find {|r| r['group_id'] == group_id_2}['group_id']).to eq group_id_2.to_s
+      end
+
+    end
 
   end
 

@@ -22,4 +22,12 @@ class LoadData
   def self.load_access_token(user_id, access_token)
     AccessToken.create user_id: user_id, access_token: access_token
   end
+
+  def self.create_analyse_group
+    group_id = rand
+    start_time = DateTime.now
+    finish_time = DateTime.now.next_month
+    record = AnalyseGroup.create! group_id: group_id, start_time: start_time, finish_time: finish_time
+    record
+  end
 end

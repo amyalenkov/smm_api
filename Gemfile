@@ -11,5 +11,6 @@ gem 'rest-client'
 group :test do
   gem 'rspec'
   gem 'sqlite3'
+  gem 'rack-test', require: 'rack/test'
 end
 
