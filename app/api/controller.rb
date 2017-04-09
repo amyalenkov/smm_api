@@ -85,5 +85,25 @@ module App
       end
 
     end
+
+    resource :users do
+
+      desc 'create new user'
+      params do
+        requires :email, type: String, desc: 'user email'
+        requires :password, type: String, desc: 'user password'
+      end
+      post 'create' do
+        if Registration.email_is_present?(params[:email])
+          error!('email is present in db', 400)
+        else
+          user = Registration.create_user(params[:email], params[:password])
+          # session = get_session user
+          # {session: session}
+        end
+      end
+
+    end
+
   end
 end

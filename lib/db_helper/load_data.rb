@@ -32,4 +32,11 @@ class LoadData
                                   data: data
     record
   end
+
+  require 'bcrypt'
+  def self.create_user(email, password)
+    password_hash = BCrypt::Password.create(password)
+    user = User.new(email: email, password_hash: password_hash)
+    user.save!
+  end
 end

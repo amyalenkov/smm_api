@@ -101,6 +101,23 @@ describe App::Controller do
 
     end
 
+    context 'user endpoint' do
+
+      context 'registration' do
+        it 'should return error code for same email' do
+          email = 'email@email.com'
+          password = 'password'
+          LoadData.create_user email, password
+          post '/users/create', email: email, password: password
+          expect(last_response.status).to eq 400
+          body = JSON.parse(last_response.body)
+          expect(body['error']).to eq 'email is present in db'
+        end
+
+      end
+
+    end
+
   end
 
 

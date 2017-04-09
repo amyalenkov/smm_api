@@ -10,6 +10,8 @@ gem 'rest-client'
 
 gem 'rufus-scheduler'
 
+gem 'bcrypt'
+
 group :test do
   gem 'rspec'
   gem 'sqlite3'
