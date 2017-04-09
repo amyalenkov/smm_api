@@ -61,6 +61,21 @@ describe App::Controller do
         expect(JSON.parse(last_response.body)['group_id']).to eq group_id.to_s
       end
 
+      it 'should update analyse group' do
+        group_id = 123
+        start_time = DateTime.now
+        finish_time = DateTime.now.next_month
+        data = '{"xz": "some data"}'
+        post '/vk/group/create_analyse', group_id: group_id, start_time: start_time, finish_time: finish_time,
+                                         data: data
+        expect(last_response.status).to eq 201
+        expect(JSON.parse(last_response.body)['group_id']).to eq group_id.to_s
+
+        put '/vk/group/update_analyse', group_id: group_id, data: data
+        expect(last_response.status).to eq 200
+        expect(JSON.parse(last_response.body)['data']).to eq data.to_s
+      end
+
       it 'should return vk group' do
         group_id = LoadData.create_analyse_group['group_id']
         get '/vk/group/get', group_id: group_id

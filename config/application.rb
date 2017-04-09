@@ -37,4 +37,4 @@ else # local environment
   ActiveRecord::Migrator.migrate('db/migrate/')
 end
 
-Scheduler.set_analyse
+# Scheduler.set_analyse

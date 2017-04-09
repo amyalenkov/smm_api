@@ -22,6 +22,21 @@ module App
           new_vk_group
         end
 
+        desc 'update data for vk group'
+        params do
+          requires :group_id, type: String, desc: 'id vk group'
+          requires :data, type: String, desc: 'analise data'
+        end
+        put 'update_analyse' do
+          record = AnalyseGroup.find_by_group_id(params[:group_id])
+          if record.nil?
+            status 404
+          else
+            record.update_attribute(:data, params[:data])
+            record
+          end
+        end
+
         desc 'get info about vk group'
         params do
           requires :group_id, type: String, desc: 'id vk group'

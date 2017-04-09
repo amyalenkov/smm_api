@@ -27,7 +27,9 @@ class LoadData
     group_id = rand
     start_time = DateTime.now
     finish_time = DateTime.now.next_month
-    record = AnalyseGroup.create! group_id: group_id, start_time: start_time, finish_time: finish_time
+    data = '{"xz": "some data"}'
+    record = AnalyseGroup.create! group_id: group_id, start_time: start_time, finish_time: finish_time,
+                                  data: data
     record
   end
 end
