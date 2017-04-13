@@ -103,6 +103,26 @@ module App
         end
       end
 
+      desc 'get access token'
+      params do
+        requires :email, type: String, desc: 'user email'
+        requires :password, type: String, desc: 'user password'
+      end
+      post 'login' do
+        access_token = TokenHelper.create_token(params[:email], params[:password])
+        if access_token.nil?
+          error!('email or login is invalid', 403)
+        else
+          {access_token: access_token}
+        end
+      end
+
+      desc 'delete access token'
+      post 'logout' do
+        TokenHelper.check_auth headers['Token']
+        TokenHelper.delete_token headers['Token']
+      end
+
     end
 
   end

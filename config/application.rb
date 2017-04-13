@@ -17,6 +17,7 @@ require_relative '../app/helpers/analiser/vk_wall_analiser'
 require_relative '../app/helpers/analiser/vk_group_analyzer'
 require_relative '../app/helpers/authorize/vk_authorize'
 require_relative '../app/helpers/scheduler'
+require_relative '../app/helpers/auth/token_helper'
 require_relative '../lib/db_helper/load_data'
 
 # Sets up database configuration
