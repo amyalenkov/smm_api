@@ -98,8 +98,8 @@ module App
           error!('email is present in db', 400)
         else
           user = Registration.create_user(params[:email], params[:password])
-          # session = get_session user
-          # {session: session}
+          token = ApiKey.create!(user_id: user.id)
+          {access_token: token.access_token}
         end
       end
 

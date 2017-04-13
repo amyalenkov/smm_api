@@ -114,6 +114,15 @@ describe App::Controller do
           expect(body['error']).to eq 'email is present in db'
         end
 
+        it 'should return access_token for uniq email' do
+          email = 'email1@email.com'
+          password = 'password'
+          post '/users/create', email: email, password: password
+          expect(last_response.status).to eq 201
+          body = JSON.parse(last_response.body)
+          expect(body['access_token']).to be
+        end
+
       end
 
     end
