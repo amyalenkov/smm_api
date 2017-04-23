@@ -12,6 +12,8 @@ gem 'rufus-scheduler'
 
 gem 'bcrypt'
 
+gem 'httplog'
+
 group :test do
   gem 'rspec'
   gem 'sqlite3'

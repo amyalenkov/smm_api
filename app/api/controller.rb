@@ -108,7 +108,7 @@ module App
         requires :email, type: String, desc: 'user email'
         requires :password, type: String, desc: 'user password'
       end
-      post 'login' do
+      get 'login' do
         access_token = TokenHelper.create_token(params[:email], params[:password])
         if access_token.nil?
           error!('email or login is invalid', 403)
@@ -118,12 +118,19 @@ module App
       end
 
       desc 'delete access token'
-      post 'logout' do
-        TokenHelper.check_auth headers['Token']
+      get 'logout' do
+        check_auth headers['Token']
         TokenHelper.delete_token headers['Token']
       end
 
     end
 
   end
+end
+
+def check_auth(token_header)
+  error!(400) if token_header.nil?
+  token = ApiKey.find_by(access_token: token_header)
+  error!(400) if token.nil?
+  error!(400) if token.expired?
 end

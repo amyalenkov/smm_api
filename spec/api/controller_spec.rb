@@ -122,6 +122,31 @@ describe App::Controller do
           body = JSON.parse(last_response.body)
           expect(body['access_token']).to be
         end
+      end
+
+      context 'login/logout' do
+        it 'check login' do
+          email = 'email2@email.com'
+          password = 'password'
+          LoadData.create_user email, password
+          get '/users/login', email: email, password: password
+          expect(last_response.status).to eq 200
+          body = JSON.parse(last_response.body)
+          expect(body['access_token']).to be
+        end
+
+        it 'check logout' do
+          email = 'email3@email.com'
+          password = 'password'
+          LoadData.create_user email, password
+          get '/users/login', email: email, password: password
+          expect(last_response.status).to eq 200
+          body = JSON.parse(last_response.body)
+          expect(body['access_token']).to be
+
+          get '/users/logout', '', { 'Token' => body['access_token']}
+          puts last_response.body
+        end
 
       end
 
