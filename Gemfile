@@ -14,6 +14,8 @@ gem 'bcrypt'
 
 gem 'httplog'
 
+gem 'grape-swagger'
+
 group :test do
   gem 'rspec'
   gem 'sqlite3'

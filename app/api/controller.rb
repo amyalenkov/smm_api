@@ -1,4 +1,5 @@
 require_relative '../../config/application.rb'
+require 'grape-swagger'
 
 module App
 
@@ -124,7 +125,7 @@ module App
       end
 
     end
-
+    add_swagger_documentation
   end
 end
 
