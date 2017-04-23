@@ -16,8 +16,8 @@ gem 'httplog'
 
 gem 'grape-swagger'
 
-gem 'sqlite3'
 group :test do
+  gem 'sqlite3'
   gem 'rspec'
   gem 'rack-test', require: 'rack/test'
 end
